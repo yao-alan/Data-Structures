@@ -1,6 +1,4 @@
-/** Created on 6/28/20 by Alan Yao.
- * Working 2D k-d tree, though poorly optimized (takes up to 3 times as long as naive check)
- */
+/** Created on 6/28/20 by Alan Yao. */
 
 import java.io.*;
 import java.util.*;
