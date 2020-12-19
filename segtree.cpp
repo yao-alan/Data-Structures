@@ -35,13 +35,13 @@ Segtree::Segtree(int arr[], int n, std::string type) {
     int i;
     for (i = 0; i < n; ++i)
         tree[i + size] = arr[i];
-    for (int x = size; i < x; ++i)
-        tree[i + size] = 0;
     // filling in higher nodes
     if (usage == "sum") {
+        memset(tree + (size+n), 0, sizeof(int) * (size-n));
         for (i = size - 1; i >= 1; --i)
             tree[i] = tree[i << 1] + tree[(i << 1) + 1];
     } else if (usage == "rmq") {
+        memset(tree + (size+n), numeric_limits<int>::max(), sizeof(int) * (size-n));
         for (i = size - 1; i >= 1; --i)
             tree[i] = std::min(tree[i << 1], tree[(i << 1) + 1]);
     }
@@ -52,10 +52,10 @@ int Segtree::update(int idx, int val) {
     idx += size;
     tree[idx] = val;
     if (usage == "sum") {
-        for (int k = idx >> 1; k >= 1; k >> 2)
+        for (int k = idx >> 1; k >= 1; k >>= 1)
             tree[k] = tree[k << 1] + tree[(k << 1) + 1];
     } else if (usage == "rmq") {
-        for (int k = idx >> 1; k >= 1; k >> 2)
+        for (int k = idx >> 1; k >= 1; k >>= 1)
             tree[k] = std::min(tree[k << 1], tree[(k << 1) + 1]);
     }
     return tree[1];
