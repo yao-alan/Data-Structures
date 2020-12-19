@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <limits>
 
 // helper function
 int fastPow2(int n) {
